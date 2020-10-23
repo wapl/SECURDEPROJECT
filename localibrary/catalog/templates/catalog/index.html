@@ -1,0 +1,25 @@
+
+{% extends "catalog/base.html" %}
+{%load static%}
+{% block content %}
+
+<div class="topnav">
+<form action="{% url 'search_results'%}" method="post"> 
+  <input  name="q" type="text" placeholder="Search..">
+  <button type="submit" formaction="{% url 'search_results'%}">Submit</button>
+  {% csrf_token %}
+</form>
+</div>
+{%for book in book_list%}
+<article class="media content-section">
+          <div class="media-body">
+            <div class="book-metadata">
+              <div class="mr-2">{{ book.author }}</div>
+            </div>
+            <h2><a class="book-title" href="{% url 'detail'  book.id %}">{{ book.title }}</a></h2>
+          </div>
+        </article>
+
+{%endfor%}
+
+{% endblock content %}
